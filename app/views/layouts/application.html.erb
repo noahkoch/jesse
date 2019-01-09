@@ -2,13 +2,23 @@
 <html>
 <head>
   <title>Jesse</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@blaze/css@x.x.x/dist/blaze.css">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="o-grid">
+  <div class="o-grid__cell">
+    <%= image_tag 'jesse.jpg' %>
+  </div>
+  <div class="o-grid__cell">
+    <h1>Hi, I'm Jesse.</h1>
+    <%= yield %>
+  </div>
+</div>
 
 </body>
 </html>

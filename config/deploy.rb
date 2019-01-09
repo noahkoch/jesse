@@ -1,7 +1,7 @@
 require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
-require 'mina_sidekiq/tasks'
+#require 'mina_sidekiq/tasks'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -10,7 +10,7 @@ require 'mina_sidekiq/tasks'
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 set :application_name, 'API.Noah'
-set :domain, 'jesse.juckfira.com'
+set :domain, '138.197.175.69'
 set :deploy_to, '/srv/app/jesse'
 set :repository, 'git@github.com:noahkoch/jesse.git'
 set :branch, 'master'
@@ -39,7 +39,7 @@ task :setup do
 end
 
 desc "Deploys the current version to the server."
-task :deploy do
+task deploy: :environment do
   # uncomment this line to make sure you pushed your local branch to the remote origin
   # invoke :'git:ensure_pushed'
   deploy do
@@ -49,6 +49,7 @@ task :deploy do
     #invoke :'sidekiq:quiet'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    invoke :'rails:db_create'
     invoke :'rails:db_migrate'
     #invoke :'sidekiq:restart'
     invoke :'deploy:cleanup'
